@@ -15,43 +15,9 @@ Read-only by design: edgebook only ever asks for a **public wallet address**. It
 
 ## Setup
 
-### 1. Run it locally
+**Follow [SETUP.md](SETUP.md).** It has click-by-click steps for Supabase, Vercel, and Google login, with a check after each part.
 
-```bash
-npm install
-cp .env.example .env.local   # then fill in the values from step 2
-npm run dev                  # http://localhost:3000
-npm test                     # unit tests
-```
-
-Without the Supabase env vars, the home page still loads but login is disabled.
-
-### 2. Create the Supabase project
-
-1. Go to https://supabase.com, sign up, create a new project (free plan). Save the database password somewhere.
-2. **Project Settings → API Keys**: copy the Project URL, the **publishable** key, and the **secret** key into `.env.local`.
-3. **SQL Editor → New query**: paste all of `supabase/migrations/0001_init.sql` and click **Run**.
-4. **Authentication → URL Configuration**: set Site URL to `http://localhost:3000` for now. Under Redirect URLs, add `http://localhost:3000/auth/callback` (and later your Vercel URL + `/auth/callback`).
-
-### 3. Turn on Google login
-
-1. In Google Cloud Console (https://console.cloud.google.com): create a project, set up the **OAuth consent screen** (External), then **Credentials → Create credentials → OAuth client ID → Web application**.
-2. Authorized redirect URI: `https://<your-project-ref>.supabase.co/auth/v1/callback` (Supabase shows this exact URL on the Google provider page).
-3. Copy the client ID + secret into **Supabase → Authentication → Sign In / Providers → Google** and enable it.
-
-### 4. Send sign-in emails through Resend
-
-Supabase's built-in email sender is for testing only and is heavily rate-limited, so magic links may not arrive for real users.
-
-1. Sign up at https://resend.com. Add and verify a domain you own (if you don't have one yet, skip this step for now and test with your own email).
-2. Create an API key.
-3. **Supabase → Authentication → Emails → SMTP Settings**: enable custom SMTP. Host `smtp.resend.com`, port `465`, username `resend`, password = your Resend API key, sender = an address on your verified domain.
-
-### 5. Deploy to Vercel
-
-1. Go to https://vercel.com, sign in with GitHub, **Add New → Project**, import `smallshaft/edgebook`.
-2. Add the three environment variables from `.env.example` (Settings → Environment Variables).
-3. Deploy. Then add `https://<your-app>.vercel.app/auth/callback` to Supabase's Redirect URLs and set the Site URL to your Vercel URL.
+To run locally instead (optional): create `.env.local` next to `package.json` with the three values from `.env.example`, then run `npm install`, `npm run dev`, and `npm test`.
 
 ## Project layout
 
