@@ -15,9 +15,9 @@ Read-only by design: edgebook only ever asks for a **public wallet address**. It
 
 ## Setup
 
-**Follow [SETUP.md](SETUP.md).** It has click-by-click steps for Supabase, Vercel, and Google login, with a check after each part.
+Follow **[SETUP.md](SETUP.md)**. It's click-by-click, browser only, about 30 minutes. It covers Supabase, Vercel, Google login, and testing.
 
-To run locally instead (optional): create `.env.local` next to `package.json` with the three values from `.env.example`, then run `npm install`, `npm run dev`, and `npm test`.
+Developer commands: `npm install`, `npm run dev`, `npm test`, `npm run build`.
 
 ## Project layout
 
